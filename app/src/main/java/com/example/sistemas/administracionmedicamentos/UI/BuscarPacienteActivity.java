@@ -14,6 +14,7 @@ import com.example.sistemas.administracionmedicamentos.Constantes.Error;
 import com.example.sistemas.administracionmedicamentos.JSON.JSONConvert;
 import com.example.sistemas.administracionmedicamentos.MainActivity;
 import com.example.sistemas.administracionmedicamentos.Modelos.ListModel;
+import com.example.sistemas.administracionmedicamentos.Modelos.Medicamentos;
 import com.example.sistemas.administracionmedicamentos.Modelos.Paciente;
 import com.example.sistemas.administracionmedicamentos.Modelos.Usuario;
 import com.example.sistemas.administracionmedicamentos.Network.AsyncConexion;
@@ -38,7 +39,7 @@ import static android.view.View.Z;
 public class BuscarPacienteActivity extends AppCompatActivity implements ResponseListener {
 
     private ZXingScannerView mScannerView;
-
+    EditText edIngreso, codigo;
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class BuscarPacienteActivity extends AppCompatActivity implements Respons
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         //Realiza ingreso de paciente
+
 
     }
 
@@ -61,7 +63,8 @@ public class BuscarPacienteActivity extends AppCompatActivity implements Respons
             setContentView(R.layout.activity_buscar_paciente);
 
             mScannerView.stopCamera();
-            EditText codigo = (EditText) findViewById(R.id.txtIngreso);
+
+            codigo = (EditText) findViewById(R.id.txtIngreso);
             codigo.setText(dato);
 
             ((Button) findViewById(R.id.btnIngresar)).setOnClickListener(new View.OnClickListener() {
@@ -70,8 +73,7 @@ public class BuscarPacienteActivity extends AppCompatActivity implements Respons
                 public void onClick(View v) {
 
                     //Se declaran los inpusts
-
-                    EditText edIngreso = ((EditText) findViewById(R.id.txtIngreso));
+                    edIngreso = ((EditText) findViewById(R.id.txtIngreso));
 
                     if (edIngreso.getText().toString().length() > 0){
 
