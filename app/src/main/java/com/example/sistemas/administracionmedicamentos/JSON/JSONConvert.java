@@ -87,19 +87,19 @@ public class JSONConvert {
         return lPaciente;
     }
 
-    public static ArrayList<Medicamentos> getPacienteMedicamento (JSONArray response){
+    public static ArrayList<Medicamentos> getMedicamentosPaciente (JSONArray response){
 
-        ArrayList<Medicamentos> lMedicamentos =  new ArrayList<>();
+        ArrayList<Medicamentos> lMedicamentos = new ArrayList<>();
 
-        try {
+        try{
 
-            for (int i = 0;  i < response.length(); i ++){
+            for (int i = 0; i < response.length(); i ++){
 
                 JSONObject mDatos = response.getJSONObject(i);
 
-                //Almacena la informacion del medicamento(s) recogido(s) en la busqueda de ingreso
+                //Almacena la informacion del paciente recogido en la busqueda de ingreso
 
-                Medicamentos medicamentos =  new Medicamentos(); // Como este devuelve un objeto de tipo Usuario, es necesario crear una instancia y posteriormente se establecen los valores
+                Medicamentos medicamentos = new Medicamentos();
                 medicamentos.ingreso     = mDatos.getString("ingreso");
                 medicamentos.codigo_producto     = mDatos.getString("codigo_producto");
                 medicamentos.num_reg     = mDatos.getString("num_reg");

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="5dp">
+
+    <data class="MedicamentosDataBinding">
+        
+        <variable
+            name="medicamentos"
+            type="com.example.sistemas.administracionmedicamentos.Modelos.Medicamentos"/>
+    </data>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvMedicamentos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <!-- Traera el codigo de los medicamentos -->
+            <TextView
+                android:id="@+id/txtCodigo"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="284dp"
+                android:layout_marginRight="248dp"
+                android:text="@{medicamentos.codigo_producto}"/>
+
+            <!-- Traera el nombre de los medicamentos -->
+            <TextView
+                android:id="@+id/txtMedicamentos"
+                android:layout_width="190dp"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="95dp"
+                android:layout_marginRight="95dp"
+                android:text="@{medicamentos.producto}"/>
+
+            <!-- Traera el opcion de los medicamentos -->
+            <TextView
+                android:id="@+id/txtCantidad"
+                android:layout_width="95dp"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
+                android:text="@{medicamentos.cantidad}"/>
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+    </LinearLayout>
+</layout>

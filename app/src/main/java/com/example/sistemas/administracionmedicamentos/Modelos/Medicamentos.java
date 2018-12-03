@@ -41,4 +41,120 @@ public class Medicamentos {
 
     public Medicamentos() {
     }
+
+    public String getIngreso() {
+        return ingreso;
+    }
+
+    public String getCodigo_producto() {
+        return codigo_producto;
+    }
+
+    public String getNum_reg() {
+        return num_reg;
+    }
+
+    public String getNum_reg_formulacion() {
+        return num_reg_formulacion;
+    }
+
+    public String getSw_estado() {
+        return sw_estado;
+    }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public String getVia_administracion_id() {
+        return via_administracion_id;
+    }
+
+    public String getUnidad_dosificacion() {
+        return unidad_dosificacion;
+    }
+
+    public String getDosis() {
+        return dosis;
+    }
+
+    public String getFrecuencia() {
+        return frecuencia;
+    }
+
+    public String getCantidad() {
+        return cantidad;
+    }
+
+    public String getSw_confirmacion_formulacion() {
+        return sw_confirmacion_formulacion;
+    }
+
+    public String getSw_requiere_autorizacion_no_pos() {
+        return sw_requiere_autorizacion_no_pos;
+    }
+
+    public String getDias_tratamiento() {
+        return dias_tratamiento;
+    }
+
+    public String getJustificacion_no_pos_id() {
+        return justificacion_no_pos_id;
+    }
+
+    public String getGrupo_protocolo_formulacion() {
+        return grupo_protocolo_formulacion;
+    }
+
+    public String getTratamiento_oncologico_id() {
+        return tratamiento_oncologico_id;
+    }
+
+    public String getTipo_solicitud() {
+        return tipo_solicitud;
+    }
+
+    public String getEvolucion_id() {
+        return evolucion_id;
+    }
+
+    public String getUsuario_id() {
+        return usuario_id;
+    }
+
+    public String getFecha_registro() {
+        return fecha_registro;
+    }
+
+    public String getProducto() {
+        return producto;
+    }
+
+    public String getProducto_descripcion() {
+        return producto_descripcion;
+    }
+
+    public String getDescripcion_abreviada() {
+        return descripcion_abreviada;
+    }
+
+    public String getContenido_unidad_venta() {
+        return contenido_unidad_venta;
+    }
+
+    public String getUnidad_id() {
+        return unidad_id;
+    }
+
+    public String getVia_administracion() {
+        return via_administracion;
+    }
+
+    public String getCodigo_pos() {
+        return codigo_pos;
+    }
+
+    public String getUnidad() {
+        return unidad;
+    }
 }

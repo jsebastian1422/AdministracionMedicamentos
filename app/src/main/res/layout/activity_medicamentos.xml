@@ -50,7 +50,7 @@
                 android:textAlignment="center"
                 android:textColor="#f0f0f0"
                 android:textSize="9sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/textView5"
@@ -62,7 +62,7 @@
                 android:textAlignment="center"
                 android:textColor="#f0f0f0"
                 android:textSize="9sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/textView6"
@@ -92,7 +92,7 @@
                 android:textAlignment="center"
                 android:textColor="#021f54"
                 android:textSize="8sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/txtCama"
@@ -120,7 +120,7 @@
 
             <TextView
                 android:id="@+id/txtIngreso"
-                android:layout_width="92dp"
+                android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:background="@drawable/text_table_body"
                 android:gravity="center"
@@ -149,7 +149,7 @@
         android:background="@drawable/table_style"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout"
         app:layout_constraintVertical_bias="0.0">
@@ -159,8 +159,8 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView13"
-                android:layout_width="258dp"
+                android:id="@+id/textView19"
+                android:layout_width="255dp"
                 android:layout_height="38dp"
                 android:background="@drawable/texttable"
                 android:gravity="center"
@@ -170,22 +170,18 @@
                 android:textSize="9sp"
                 android:textStyle="bold" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="108dp"
+                android:layout_height="38dp"
+                android:background="@drawable/texttable"
+                android:gravity="center"
+                android:text="IDENTIFICACION"
+                android:textAlignment="center"
+                android:textColor="#f0f0f0"
+                android:textSize="9sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="105dp"
-                    android:layout_height="38dp"
-                    android:background="@drawable/texttable"
-                    android:gravity="center"
-                    android:text="IDENTIFICACION"
-                    android:textAlignment="center"
-                    android:textColor="#f0f0f0"
-                    android:textSize="9sp"
-                    android:textStyle="bold" />
-            </TableRow>
         </TableRow>
 
         <TableRow
@@ -194,8 +190,8 @@
 
             <TextView
                 android:id="@+id/txtPaciente"
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
                 android:background="@drawable/text_table_body_2"
                 android:gravity="center"
                 android:text=""
@@ -204,60 +200,50 @@
                 android:textSize="8sp"
                 android:textStyle="bold" />
 
-            <TableRow
+            <TextView
+                android:id="@+id/txtIdentificacion"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/txtIdentificacion"
-                    android:layout_width="105dp"
-                    android:layout_height="38dp"
-                    android:background="@drawable/text_table_body"
-                    android:gravity="center"
-                    android:text=""
-                    android:textAlignment="center"
-                    android:textColor="#021f54"
-                    android:textSize="8sp"
-                    android:textStyle="bold" />
-            </TableRow>
-
+                android:layout_height="match_parent"
+                android:background="@drawable/text_table_body"
+                android:gravity="center"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="#021f54"
+                android:textSize="8sp"
+                android:textStyle="bold" />
         </TableRow>
-
     </TableLayout>
 
     <Button
-        android:id="@+id/btnBucarMedicamentos"
-        android:layout_width="197dp"
-        android:layout_height="41dp"
+        android:id="@+id/btnBuscMeciamento"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Buscar Medicamentos"
+        android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.05" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcvMedicamentos"
-        android:layout_width="368dp"
-        android:layout_height="274dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
-        app:layout_constraintVertical_bias="1.0" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="271dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="247dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcvMedicamentos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
