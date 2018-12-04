@@ -1,7 +1,7 @@
 package com.example.sistemas.administracionmedicamentos.Adaptadores;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,15 +10,15 @@ import android.widget.TextView;
 
 import com.example.sistemas.administracionmedicamentos.Modelos.Medicamentos;
 import com.example.sistemas.administracionmedicamentos.R;
+import com.example.sistemas.administracionmedicamentos.UI.MedicamentosDetalActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MedicamentosAdapter extends RecyclerView.Adapter<MedicamentosAdapter.MedicViewHolder>{
 
     private Context mContext;
+    private Medicamentos medicamentos;
     private ArrayList<Medicamentos> lMediamentos;
-    private View.OnClickListener listener;
 
     public MedicamentosAdapter(Context mContext, ArrayList<Medicamentos> lMediamentos) {
         this.mContext = mContext;
@@ -30,12 +30,11 @@ public class MedicamentosAdapter extends RecyclerView.Adapter<MedicamentosAdapte
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.cardview_medicamentos, null);
-        
         return new MedicViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MedicViewHolder holder, int position) {
+    public void onBindViewHolder(MedicViewHolder holder, final int position) {
 
         Medicamentos medicamentos = lMediamentos.get(position);
 
@@ -65,6 +64,19 @@ public class MedicamentosAdapter extends RecyclerView.Adapter<MedicamentosAdapte
             txtCodigo   = itemView.findViewById(R.id.txtCodigo);
             txtProducto = itemView.findViewById(R.id.txtProducto);
             txtCantidad = itemView.findViewById(R.id.txtCantidad);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+
+
+                    Intent MedicaDatalle = new Intent(view.getContext(), MedicamentosDetalActivity.class);
+                    MedicaDatalle.putExtra("Codigo", txtCodigo.getText());
+                    view.getContext().startActivity(MedicaDatalle);
+                }
+            });
+
         }
     }
 }
