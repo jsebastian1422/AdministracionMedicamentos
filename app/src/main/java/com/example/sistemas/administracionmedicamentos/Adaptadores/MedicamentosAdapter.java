@@ -2,6 +2,7 @@ package com.example.sistemas.administracionmedicamentos.Adaptadores;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,6 @@ public class MedicamentosAdapter extends RecyclerView.Adapter<MedicamentosAdapte
     private Context mContext;
     private Medicamentos medicamentos;
     private ArrayList<Medicamentos> lMediamentos;
-
     public MedicamentosAdapter(Context mContext, ArrayList<Medicamentos> lMediamentos) {
         this.mContext = mContext;
         this.lMediamentos = lMediamentos;
@@ -43,7 +43,6 @@ public class MedicamentosAdapter extends RecyclerView.Adapter<MedicamentosAdapte
         holder.txtCodigo.setText(medicamentos.codigo_producto);
         holder.txtProducto.setText(medicamentos.producto);
         holder.txtCantidad.setText(medicamentos.cantidad);
-
 
     }
 
@@ -70,9 +69,39 @@ public class MedicamentosAdapter extends RecyclerView.Adapter<MedicamentosAdapte
                 @Override
                 public void onClick(View view) {
 
+                    Medicamentos medic = lMediamentos.get(getAdapterPosition());
+                    //Bundle b = new Bundle();
+                    //b.putString("codigo_producto", medic.codigo_producto);
 
                     Intent MedicaDatalle = new Intent(view.getContext(), MedicamentosDetalActivity.class);
-                    MedicaDatalle.putExtra("Codigo", txtCodigo.getText());
+
+                    //Envia los datos del Objeto selccionado estos seran referenciados por el KEY "producto"
+
+                    MedicaDatalle.putExtra("producto", medic.producto);
+                    MedicaDatalle.putExtra("codigo_producto", medic.producto);
+                    MedicaDatalle.putExtra("codigo_pos", medic.codigo_pos);
+
+                    //Envia la via de administracion con su value
+                    MedicaDatalle.putExtra("via_administracion", medic.via_administracion);
+                    MedicaDatalle.putExtra("via_administracion_id", medic.via_administracion_id);
+
+                    //Envia la unidad de dosificacion y su id
+                    MedicaDatalle.putExtra("unidad_dosificacion", medic.unidad_dosificacion);
+                    MedicaDatalle.putExtra("unidad_id", medic.unidad_id);
+
+                    //Envia la dosis a aplicar y la frecuencia
+                    MedicaDatalle.putExtra("dosis", medic.dosis);
+                    MedicaDatalle.putExtra("frecuencia", medic.frecuencia);
+
+                    //Envia la cantidad por unidad
+                    MedicaDatalle.putExtra("cantidad", medic.cantidad);
+                    MedicaDatalle.putExtra("contenido_unidad_venta", medic.contenido_unidad_venta);
+
+                    //Envia la observacion
+                    MedicaDatalle.putExtra("observacion", medic.observacion);
+
+                    //MedicaDatalle.putExtra("Codigo", txtCodigo.getText());
+                    //view.getContext().startActivity(MedicaDatalle);
                     view.getContext().startActivity(MedicaDatalle);
                 }
             });
