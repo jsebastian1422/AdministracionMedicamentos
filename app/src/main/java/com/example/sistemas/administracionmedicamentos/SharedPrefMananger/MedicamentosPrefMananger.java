@@ -58,12 +58,12 @@ public class MedicamentosPrefMananger {
         editor.putString("observacion", medicamentos.observacion);
         editor.putString("via_administracion_id", medicamentos.via_administracion_id);
         editor.putString("unidad_dosificacion", medicamentos.unidad_dosificacion);
-        editor.putString("dosis", medicamentos.dosis);
+        editor.putInt("dosis", medicamentos.dosis);
         editor.putString("frecuencia", medicamentos.frecuencia);
-        editor.putString("cantidad", medicamentos.cantidad);
+        editor.putFloat("cantidad", medicamentos.cantidad);
         editor.putString("sw_confirmacion_formulacion", medicamentos.sw_confirmacion_formulacion);
         editor.putString("sw_requiere_autorizacion_no_pos", medicamentos.sw_requiere_autorizacion_no_pos);
-        editor.putString("dias_tratamiento", medicamentos.dias_tratamiento);
+        editor.putInt("dias_tratamiento", medicamentos.dias_tratamiento);
         editor.putString("justificacion_no_pos_id", medicamentos.justificacion_no_pos_id);
         editor.putString("grupo_protocolo_formulacion", medicamentos.grupo_protocolo_formulacion);
         editor.putString("tratamiento_oncologico_id", medicamentos.tratamiento_oncologico_id);
@@ -79,6 +79,9 @@ public class MedicamentosPrefMananger {
         editor.putString("via_administracion", medicamentos.via_administracion);
         editor.putString("codigo_pos", medicamentos.codigo_pos);
         editor.putString("unidad", medicamentos.unidad);
+        editor.putFloat("stock", medicamentos.stock);
+        editor.putFloat("total_suministrado", medicamentos.total_suministrado);
+        editor.putFloat("total_despachado", medicamentos.total_despachado);
 
         editor.commit();
 
@@ -96,12 +99,12 @@ public class MedicamentosPrefMananger {
         medicamentos.observacion    =   preferences.getString("observacion", "");
         medicamentos.via_administracion_id    =   preferences.getString("via_administracion_id", "");
         medicamentos.unidad_dosificacion    =   preferences.getString("unidad_dosificacion", "");
-        medicamentos.dosis    =   preferences.getString("dosis", "");
+        medicamentos.dosis    =   preferences.getInt("dosis", 0);
         medicamentos.frecuencia    =   preferences.getString("frecuencia", "");
-        medicamentos.cantidad    =   preferences.getString("cantidad", "");
+        medicamentos.cantidad    =   preferences.getInt("cantidad", 0);
         medicamentos.sw_confirmacion_formulacion    =   preferences.getString("sw_confirmacion_formulacion", "");
         medicamentos.sw_requiere_autorizacion_no_pos    =   preferences.getString("sw_requiere_autorizacion_no_pos", "");
-        medicamentos.dias_tratamiento    =   preferences.getString("dias_tratamiento", "");
+        medicamentos.dias_tratamiento    =   preferences.getInt("dias_tratamiento", 0);
         medicamentos.justificacion_no_pos_id    =   preferences.getString("justificacion_no_pos_id", "");
         medicamentos.grupo_protocolo_formulacion    =   preferences.getString("grupo_protocolo_formulacion", "");
         medicamentos.tratamiento_oncologico_id    =   preferences.getString("tratamiento_oncologico_id", "");
@@ -117,6 +120,9 @@ public class MedicamentosPrefMananger {
         medicamentos.via_administracion    =   preferences.getString("via_administracion", "");
         medicamentos.codigo_pos    =   preferences.getString("codigo_pos", "");
         medicamentos.unidad    =   preferences.getString("unidad", "");
+        medicamentos.stock    =   preferences.getInt("stock", 0);
+        medicamentos.total_suministrado    =   preferences.getInt("total_suministrado", 0);
+        medicamentos.total_despachado    =   preferences.getInt("total_despachado", 0);
 
         return medicamentos;
 

@@ -9,9 +9,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_height="match_parent">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -148,10 +146,92 @@
                 </TableRow>
 
                 <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="157dp">
+
+                    <TextView
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/text_table_body_2"
+                        android:gravity="center"
+                        android:text="Can. Confirmadas"
+                        android:textAlignment="center"
+                        android:textColor="#021f54"
+
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/txtCantConfirBodega"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/text_table_body"
+                        android:gravity="center"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:textColor="#021f54"
+
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/text_table_body_2"
+                        android:gravity="center"
+                        android:text="Can. Bodega"
+                        android:textAlignment="center"
+                        android:textColor="#021f54"
+
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/txtCantBodegaPaci"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/text_table_body"
+                        android:gravity="center"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:textColor="#021f54"
+
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/text_table_body_2"
+                        android:gravity="center"
+                        android:text="Can. Suminis"
+                        android:textAlignment="center"
+                        android:textColor="#021f54"
+
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/txtCantSuminstrada"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/text_table_body"
+                        android:gravity="center"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:textColor="#021f54"
+
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+
+                </TableRow>
+
+                <TableRow
                     android:id="@+id/rowObservacion"
                     android:layout_width="fill_parent"
                     android:layout_height="38dp"
-                    android:layout_marginTop="157dp"
+                    android:layout_marginTop="195dp"
                     android:visibility="invisible">
 
                     <TextView
@@ -176,45 +256,40 @@
                         android:textAlignment="center"
                         android:textColor="#021f54"
 
-                        android:textSize="11sp"
+                        android:textSize="10sp"
                         android:textStyle="bold" />
                 </TableRow>
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="233dp"
+                    android:text="Ingreso Medicamento"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:textColor="#021f54"
+
+                    android:textSize="12sp"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:id="@+id/edtIngreMedicamento"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:inputType="numberDecimal"/>
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="250dp"
+                    android:layout_toEndOf="@id/edtIngreMedicamento"
+                    android:layout_toRightOf="@id/edtIngreMedicamento"
+                    android:src="@drawable/ic_add_medic"
+                    android:tint="#0844a4"/>
             </RelativeLayout>
         </TableLayout>
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_weight="1"
-        android:text="Registrar Medicamentos"
-        android:textColor="#021f54"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-        app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.435" />
-
-    <EditText
-        android:layout_width="182dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
-        app:layout_constraintVertical_bias="0.004" />
-
 
 </android.support.constraint.ConstraintLayout>

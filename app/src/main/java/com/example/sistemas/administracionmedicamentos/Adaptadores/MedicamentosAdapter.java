@@ -42,7 +42,7 @@ public class MedicamentosAdapter extends RecyclerView.Adapter<MedicamentosAdapte
 
         holder.txtCodigo.setText(medicamentos.codigo_producto);
         holder.txtProducto.setText(medicamentos.producto);
-        holder.txtCantidad.setText(medicamentos.cantidad);
+        holder.txtCantidad.setText("" + medicamentos.cantidad);
 
     }
 
@@ -78,7 +78,7 @@ public class MedicamentosAdapter extends RecyclerView.Adapter<MedicamentosAdapte
                     //Envia los datos del Objeto selccionado estos seran referenciados por el KEY "producto"
 
                     MedicaDatalle.putExtra("producto", medic.producto);
-                    MedicaDatalle.putExtra("codigo_producto", medic.producto);
+                    MedicaDatalle.putExtra("codigo_producto", medic.codigo_producto);
                     MedicaDatalle.putExtra("codigo_pos", medic.codigo_pos);
 
                     //Envia la via de administracion con su value
@@ -99,6 +99,11 @@ public class MedicamentosAdapter extends RecyclerView.Adapter<MedicamentosAdapte
 
                     //Envia la observacion
                     MedicaDatalle.putExtra("observacion", medic.observacion);
+
+                    //Envia la bodega del paciente
+                    MedicaDatalle.putExtra("stock", medic.stock);
+                    MedicaDatalle.putExtra("total_suministrado", medic.total_suministrado);
+                    MedicaDatalle.putExtra("total_despachado", medic.total_despachado);
 
                     //MedicaDatalle.putExtra("Codigo", txtCodigo.getText());
                     //view.getContext().startActivity(MedicaDatalle);

@@ -2,12 +2,16 @@ package com.example.sistemas.administracionmedicamentos.Modelos;
 
 public class Medicamentos {
 
-    public String ingreso,codigo_producto,num_reg,num_reg_formulacion,sw_estado,observacion,via_administracion_id,unidad_dosificacion,dosis,frecuencia
-            ,cantidad,sw_confirmacion_formulacion,sw_requiere_autorizacion_no_pos,dias_tratamiento,justificacion_no_pos_id,grupo_protocolo_formulacion
+    public String ingreso,codigo_producto,num_reg,num_reg_formulacion,sw_estado,observacion,via_administracion_id,unidad_dosificacion,frecuencia
+            ,sw_confirmacion_formulacion,sw_requiere_autorizacion_no_pos,justificacion_no_pos_id,grupo_protocolo_formulacion
             ,tratamiento_oncologico_id,tipo_solicitud,evolucion_id,usuario_id,fecha_registro,producto,producto_descripcion,descripcion_abreviada,contenido_unidad_venta
             ,unidad_id,via_administracion,codigo_pos,unidad;
 
-    public Medicamentos(String ingreso, String codigo_producto, String num_reg, String num_reg_formulacion, String sw_estado, String observacion, String via_administracion_id, String unidad_dosificacion, String dosis, String frecuencia, String cantidad, String sw_confirmacion_formulacion, String sw_requiere_autorizacion_no_pos, String dias_tratamiento, String justificacion_no_pos_id, String grupo_protocolo_formulacion, String tratamiento_oncologico_id, String tipo_solicitud, String evolucion_id, String usuario_id, String fecha_registro, String producto, String producto_descripcion, String descripcion_abreviada, String contenido_unidad_venta, String unidad_id, String via_administracion, String codigo_pos, String unidad) {
+    public float stock,total_suministrado,total_despachado;
+
+    public int dias_tratamiento,dosis,cantidad;
+
+    public Medicamentos(String ingreso, String codigo_producto, String num_reg, String num_reg_formulacion, String sw_estado, String observacion, String via_administracion_id, String unidad_dosificacion, String frecuencia, String sw_confirmacion_formulacion, String sw_requiere_autorizacion_no_pos, String justificacion_no_pos_id, String grupo_protocolo_formulacion, String tratamiento_oncologico_id, String tipo_solicitud, String evolucion_id, String usuario_id, String fecha_registro, String producto, String producto_descripcion, String descripcion_abreviada, String contenido_unidad_venta, String unidad_id, String via_administracion, String codigo_pos, String unidad, float stock, float total_suministrado, float total_despachado, int dias_tratamiento, int dosis, int cantidad) {
         this.ingreso = ingreso;
         this.codigo_producto = codigo_producto;
         this.num_reg = num_reg;
@@ -16,12 +20,9 @@ public class Medicamentos {
         this.observacion = observacion;
         this.via_administracion_id = via_administracion_id;
         this.unidad_dosificacion = unidad_dosificacion;
-        this.dosis = dosis;
         this.frecuencia = frecuencia;
-        this.cantidad = cantidad;
         this.sw_confirmacion_formulacion = sw_confirmacion_formulacion;
         this.sw_requiere_autorizacion_no_pos = sw_requiere_autorizacion_no_pos;
-        this.dias_tratamiento = dias_tratamiento;
         this.justificacion_no_pos_id = justificacion_no_pos_id;
         this.grupo_protocolo_formulacion = grupo_protocolo_formulacion;
         this.tratamiento_oncologico_id = tratamiento_oncologico_id;
@@ -37,6 +38,12 @@ public class Medicamentos {
         this.via_administracion = via_administracion;
         this.codigo_pos = codigo_pos;
         this.unidad = unidad;
+        this.stock = stock;
+        this.total_suministrado = total_suministrado;
+        this.total_despachado = total_despachado;
+        this.dias_tratamiento = dias_tratamiento;
+        this.dosis = dosis;
+        this.cantidad = cantidad;
     }
 
     public Medicamentos() {

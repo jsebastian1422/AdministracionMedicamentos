@@ -2,6 +2,7 @@ package com.example.sistemas.administracionmedicamentos.JSON;
 
 import android.util.Log;
 
+import com.example.sistemas.administracionmedicamentos.Modelos.BodegaPaciente;
 import com.example.sistemas.administracionmedicamentos.Modelos.Medicamentos;
 import com.example.sistemas.administracionmedicamentos.Modelos.Paciente;
 import com.example.sistemas.administracionmedicamentos.Modelos.Usuario;
@@ -108,12 +109,12 @@ public class JSONConvert {
                 medicamentos.observacion    =   mDatos.getString("observacion");
                 medicamentos.via_administracion_id    =   mDatos.getString("via_administracion_id");
                 medicamentos.unidad_dosificacion    =   mDatos.getString("unidad_dosificacion");
-                medicamentos.dosis    =   mDatos.getString("dosis");
+                medicamentos.dosis    =  mDatos.getInt("dosis");
                 medicamentos.frecuencia    =   mDatos.getString("frecuencia");
-                medicamentos.cantidad    =   mDatos.getString("cantidad");
+                medicamentos.cantidad    =  mDatos.getInt("cantidad");
                 medicamentos.sw_confirmacion_formulacion    =   mDatos.getString("sw_confirmacion_formulacion");
                 medicamentos.sw_requiere_autorizacion_no_pos    =   mDatos.getString("sw_requiere_autorizacion_no_pos");
-                medicamentos.dias_tratamiento    =   mDatos.getString("dias_tratamiento");
+                medicamentos.dias_tratamiento    =   mDatos.getInt("dias_tratamiento");
                 medicamentos.justificacion_no_pos_id    =   mDatos.getString("justificacion_no_pos_id");
                 medicamentos.grupo_protocolo_formulacion    =   mDatos.getString("grupo_protocolo_formulacion");
                 medicamentos.tratamiento_oncologico_id    =   mDatos.getString("tratamiento_oncologico_id");
@@ -129,6 +130,9 @@ public class JSONConvert {
                 medicamentos.via_administracion    =   mDatos.getString("via_administracion");
                 medicamentos.codigo_pos    =   mDatos.getString("codigo_pos");
                 medicamentos.unidad    =   mDatos.getString("unidad");
+                medicamentos.stock     = (float) mDatos.getDouble("stock");
+                medicamentos.total_despachado = (float) mDatos.getDouble("total_despachado");
+                medicamentos.total_suministrado = (float) mDatos.getDouble("total_suministrado");
 
                 lMedicamentos.add(medicamentos);
             }
@@ -137,6 +141,49 @@ public class JSONConvert {
         }
 
         return lMedicamentos;
+    }
+
+    public static ArrayList<BodegaPaciente> getBodegaPaciente (JSONArray response){
+
+        ArrayList<BodegaPaciente> lBodegaPaciente = new ArrayList<>();
+
+        try {
+
+            for (int i = 0; i < response.length(); i ++){
+
+                JSONObject mDatos = response.getJSONObject(i);
+
+                //Almacena la informacion del paciente recogido en la busqueda de la bodega del paciente
+
+                BodegaPaciente bodegaPaciente = new BodegaPaciente();
+                bodegaPaciente.ingreso = mDatos.getString("ingreso");
+                bodegaPaciente.stock    = mDatos.getString("stock");
+                bodegaPaciente.stock_paciente    = mDatos.getString("stock_paciente");
+                bodegaPaciente.stock_almacen    = mDatos.getString("stock_almacen");
+                bodegaPaciente.cantidad_en_solicitud    = mDatos.getString("cantidad_en_solicitud");
+                bodegaPaciente.cantidad_pendiente_por_recibir    = mDatos.getString("cantidad_pendiente_por_recibir");
+                bodegaPaciente.cantidad_en_devolucion    = mDatos.getString("cantidad_en_devolucion");
+                bodegaPaciente.total_solicitado    = mDatos.getString("total_solicitado");
+                bodegaPaciente.total_cancelado = mDatos.getString("total_cancelado");
+                bodegaPaciente.total_cancelado_antes_de_confirmar    = mDatos.getString("total_cancelado_antes_de_confirmar");
+                bodegaPaciente.total_cancelado_por_la_bodega    = mDatos.getString("total_cancelado_por_la_bodega");
+                bodegaPaciente.total_despachado    = mDatos.getString("total_despachado");
+                bodegaPaciente.total_recibido    = mDatos.getString("total_recibido");
+                bodegaPaciente.total_devuelto    = mDatos.getString("total_devuelto");
+                bodegaPaciente.total_consumo_directo    = mDatos.getString("total_consumo_directo");
+                bodegaPaciente.total_suministrado    = mDatos.getString("total_suministrado");
+                bodegaPaciente.total_perdidas    = mDatos.getString("total_perdidas");
+                bodegaPaciente.total_aprovechamiento    = mDatos.getString("total_aprovechamiento");
+                bodegaPaciente.codigo_producto    =   mDatos.getString("codigo_producto");
+                bodegaPaciente.sw_tipo_producto    =   mDatos.getString("sw_tipo_producto");
+
+                lBodegaPaciente.add(bodegaPaciente);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return lBodegaPaciente;
     }
 
 }
