@@ -297,6 +297,7 @@
 
                 <ImageButton
                     android:id="@+id/addMedicamento"
+                    style="@android:style/Widget.Material.Light.ImageButton"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_margin="5dp"
@@ -307,6 +308,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_margin="5dp"
+                    android:onClick="ScanCodigoBarras"
                     android:src="@drawable/ic_open_scanner" />
             </TableRow>
 
