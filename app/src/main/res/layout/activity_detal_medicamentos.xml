@@ -9,7 +9,9 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints"
+        android:orientation="vertical">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -259,35 +261,64 @@
                         android:textSize="10sp"
                         android:textStyle="bold" />
                 </TableRow>
+            </RelativeLayout>
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="150dp"
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="233dp"
                     android:text="Ingreso Medicamento"
-                    android:layout_centerHorizontal="true"
+
                     android:gravity="center"
                     android:textColor="#021f54"
 
-                    android:textSize="12sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/edtIngreMedicamento"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="250dp"
-                    android:layout_centerHorizontal="true"
                     android:inputType="numberDecimal"/>
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="250dp"
-                    android:layout_toEndOf="@id/edtIngreMedicamento"
-                    android:layout_toRightOf="@id/edtIngreMedicamento"
-                    android:src="@drawable/ic_add_medic"
-                    android:tint="#0844a4"/>
+                    android:id="@+id/addMedicamento"
+                    android:layout_margin="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_add_medic"/>
+
+                <ImageView
+                    android:id="@+id/abrirScanner"
+                    android:layout_margin="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_open_scanner"/>
+            </TableRow>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
             </RelativeLayout>
         </TableLayout>
     </LinearLayout>

@@ -110,6 +110,8 @@ public class MedicamentosDetalActivity extends AppCompatActivity  {
             rowObsercacio.setVisibility(View.VISIBLE);
         }
 
+        
+
 
 
 
