@@ -297,16 +297,18 @@
 
                 <ImageButton
                     android:id="@+id/addMedicamento"
-                    android:layout_width="30dp"
+                    android:layout_width="35dp"
                     android:layout_height="30dp"
                     android:layout_margin="5dp"
+                    android:background="@drawable/st_btn_redondeado"
                     android:src="@drawable/ic_add_medic" />
 
                 <ImageButton
                     android:id="@+id/openScanner"
-                    android:layout_width="30dp"
+                    android:layout_width="35dp"
                     android:layout_height="30dp"
                     android:layout_margin="5dp"
+                    android:background="@drawable/st_btn_redondeado"
                     android:src="@drawable/ic_open_scanner" />
             </TableRow>
 

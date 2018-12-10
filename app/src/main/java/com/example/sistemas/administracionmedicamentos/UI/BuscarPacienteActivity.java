@@ -2,6 +2,8 @@ package com.example.sistemas.administracionmedicamentos.UI;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.wifi.ScanResult;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sistemas.administracionmedicamentos.Constantes.Error;
 import com.example.sistemas.administracionmedicamentos.JSON.JSONConvert;
@@ -22,6 +25,8 @@ import com.example.sistemas.administracionmedicamentos.R;
 import com.example.sistemas.administracionmedicamentos.SharedPrefMananger.IngresoPacientePrefMananger;
 import com.example.sistemas.administracionmedicamentos.SharedPrefMananger.LoginSharedPrefeMananger;
 import com.example.sistemas.administracionmedicamentos.Utilidades.Util;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -38,8 +43,9 @@ import static android.view.View.Z;
 public class BuscarPacienteActivity extends AppCompatActivity implements ResponseListener {
 
     private ZXingScannerView mScannerView;
+    Button openScanner;
+    EditText codIngreso;
 
-    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,56 +54,66 @@ public class BuscarPacienteActivity extends AppCompatActivity implements Respons
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        //Realiza ingreso de paciente
+        codIngreso  = (EditText)findViewById(R.id.edtIngreso);
+        openScanner = (Button)findViewById(R.id.btnScaner);
+
+        //Se inicia la captura de codigo de barras al precionar el boton
+
+        openScanner.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                new IntentIntegrator(BuscarPacienteActivity.this).initiateScan();
+            }
+        });
+
+        ((Button)findViewById(R.id.btnIngresar)).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                if (codIngreso.getText().toString().length() > 0){
+
+                    String ingreso =  codIngreso.getText().toString();
+
+                    List<ListModel> mParametros = new ArrayList<ListModel>();
+                    mParametros.add(new ListModel("ingreso", ingreso));
+
+                    new AsyncConexion(BuscarPacienteActivity.this, BuscarPacienteActivity.this, IngresoPacientePrefMananger.getIP(BuscarPacienteActivity.this),
+                            new String[]{"Ingresando Paciente", "Aguarde Por Favor..."}, mParametros).execute();
+                }else{
+
+                    codIngreso.setError((codIngreso.getText().length() > 0) ? null : "Verique el error");
+                }
+            }
+        });
 
     }
 
-    class ZXingScanner implements ZXingScannerView.ResultHandler{
+    /*METODOS QUE PERMITEN EL SCANEO*/
 
-        @Override
-        public void handleResult(com.google.zxing.Result result) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-            String dato = result.getText();
-            setContentView(R.layout.activity_buscar_paciente);
+        final IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        handleResult(scanResult);
+    }
 
-            mScannerView.stopCamera();
-            EditText codigo = (EditText) findViewById(R.id.txtIngreso);
-            codigo.setText(dato);
+    private void handleResult (IntentResult scanResult){
 
-            ((Button) findViewById(R.id.btnIngresar)).setOnClickListener(new View.OnClickListener() {
+        if (scanResult != null){
 
-                @Override
-                public void onClick(View v) {
-
-                    //Se declaran los inpusts
-
-                    EditText edIngreso = ((EditText) findViewById(R.id.txtIngreso));
-
-                    if (edIngreso.getText().toString().length() > 0){
-
-                        String ingreso = edIngreso.getText().toString();
-
-                        List<ListModel> mParametros = new ArrayList<ListModel>();
-                        mParametros.add(new ListModel("ingreso", ingreso));
-
-                        new AsyncConexion(BuscarPacienteActivity.this, BuscarPacienteActivity.this, IngresoPacientePrefMananger.getIP(BuscarPacienteActivity.this),
-                                new String[]{"Ingresando Paciente", "Aguarde Por Favor..."}, mParametros).execute();
-                    }else{
-
-                        edIngreso.setError((edIngreso.getText().length() > 0) ? null : "Verique el error");
-                    }
-                }
-            });
-
+            updateTextView(scanResult.getContents(), scanResult.getFormatName());
+        }else {
+            Toast.makeText(this, "No Se Detecto Codigo De Barras", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void Escanerar(View view) {
+    /*Metodo que imprime el cosigo de barras recibido*/
+    private void updateTextView(String scan_result, String scan_result_format){
 
-        mScannerView = new ZXingScannerView(this);
-        mScannerView.setResultHandler(new ZXingScanner());
-        setContentView(mScannerView);
-        mScannerView.startCamera();
+        codIngreso.setText(scan_result);
     }
 
     @Override

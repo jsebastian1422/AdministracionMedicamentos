@@ -170,26 +170,6 @@ public class MedicamentosDetalActivity extends AppCompatActivity  implements Res
         }
     }
 
-    /*Metodo que realiiza el ingreso manual del medicamento*/
-    public void ingresoManualMedicamento(){
-
-        ImageButton ingresoManualMedic = (ImageButton)findViewById(R.id.addMedicamento);
-        codMedicamento = (EditText)findViewById(R.id.edtIngreMedicamento);
-
-        numIngresos = 0;
-        /*Aqui se obtine el codigo ingresado de manera manual y una vez presionado el boton de ingreso se realizara la busqueda del paciente*/
-
-        ingresoManualMedic.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (numIngresos <= Cantidad){
-
-                }
-            }
-        });
-    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
