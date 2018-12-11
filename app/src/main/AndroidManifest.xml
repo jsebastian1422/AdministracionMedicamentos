@@ -33,7 +33,8 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".UI.BuscarPacienteActivity" />
         <activity android:name=".UI.MedicamentosActivity" />
-        <activity android:name=".UI.MedicamentosDetalActivity"></activity>
+        <activity android:name=".UI.MedicamentosDetalActivity" />
+        <activity android:name=".UI.ListSuminstrosActivity"></activity>
     </application>
 
 </manifest>

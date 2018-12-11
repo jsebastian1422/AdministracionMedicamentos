@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.util.Linkify;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -167,6 +170,34 @@ public class MedicamentosDetalActivity extends AppCompatActivity  implements Res
             rowObsercacio.setEnabled(false);
         }else{
             rowObsercacio.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.medic_activity_options, menu);
+        return super .onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_list:
+                item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                    Intent listMedic = new Intent();
+                    listMedic.setClass(MedicamentosDetalActivity.this, ListSuminstrosActivity.class);
+                    listMedic.putExtra("Codigo", Codigo);
+                    startActivity(listMedic);
+                    return true;
+                    }
+                });
+
+                default:
+                    return super.onOptionsItemSelected(item);
         }
     }
 

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.sistemas.administracionmedicamentos.Modelos.BodegaPaciente;
 import com.example.sistemas.administracionmedicamentos.Modelos.Medicamentos;
+import com.example.sistemas.administracionmedicamentos.Modelos.MedicamentosSuministrados;
 import com.example.sistemas.administracionmedicamentos.Modelos.Paciente;
 import com.example.sistemas.administracionmedicamentos.Modelos.Usuario;
 
@@ -184,6 +185,44 @@ public class JSONConvert {
         }
 
         return lBodegaPaciente;
+    }
+
+    public static ArrayList<MedicamentosSuministrados> getSuministroMedicamentos (JSONArray response){
+
+        ArrayList<MedicamentosSuministrados> lMedicamentoSuministrado = new ArrayList<>();
+
+        try {
+
+            for (int i = 0; i < response.length(); i ++){
+
+                JSONObject mDatos = response.getJSONObject(i);
+
+                //Almacena la informacion del paciente recogido en la busqueda de la bodega del paciente
+
+                MedicamentosSuministrados medicamentosSuministrados = new MedicamentosSuministrados();
+                medicamentosSuministrados.suministro_id = mDatos.getInt("suministro_id");
+                medicamentosSuministrados.ingreso    = mDatos.getInt("ingreso");
+                medicamentosSuministrados.num_reg_formulacion    = mDatos.getInt("num_reg_formulacion");
+                medicamentosSuministrados.usuario_id_control    = mDatos.getInt("usuario_id_control");
+                medicamentosSuministrados.cantidad_suministrada    = mDatos.getString("cantidad_suministrada");
+                medicamentosSuministrados.cantidad_perdidas    = mDatos.getString("cantidad_perdidas");
+                medicamentosSuministrados.cantidad_aprovechada    = mDatos.getInt("cantidad_aprovechada");
+                medicamentosSuministrados.sw_estado    = mDatos.getString("sw_estado");
+                medicamentosSuministrados.codigo_producto = mDatos.getString("codigo_producto");
+                medicamentosSuministrados.fecha_realizado    = mDatos.getString("fecha_realizado");
+                medicamentosSuministrados.fecha_registro_control    = mDatos.getString("fecha_registro_control");
+                medicamentosSuministrados.estacion_id    = mDatos.getString("estacion_id");
+                medicamentosSuministrados.observacion    = mDatos.getString("observacion");
+                medicamentosSuministrados.sw_id_consumo    = mDatos.getString("sw_id_consumo");
+                medicamentosSuministrados.nombre    = mDatos.getString("nombre");
+
+                lMedicamentoSuministrado.add(medicamentosSuministrados);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return lMedicamentoSuministrado;
     }
 
 }
