@@ -15,13 +15,19 @@ public class IngresoMedicamentoAdapter extends RecyclerView.Adapter<IngresoMedic
     private Context mContext;
     private ArrayList<IngMedicamentoPaciente> lIngMedicamento;
 
+    public IngresoMedicamentoAdapter(Context mContext, ArrayList<IngMedicamentoPaciente> lIngMedicamento) {
+        this.mContext = mContext;
+        this.lIngMedicamento = lIngMedicamento;
+    }
+
+    @NonNull
     @Override
-    public IngresoMedicamentoAdapter.IngresoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public IngresoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         return null;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull IngresoMedicamentoAdapter.IngresoViewHolder ingresoViewHolder, int i) {
+    public void onBindViewHolder(@NonNull IngresoViewHolder ingresoViewHolder, int i) {
 
     }
 
@@ -29,6 +35,7 @@ public class IngresoMedicamentoAdapter extends RecyclerView.Adapter<IngresoMedic
     public int getItemCount() {
         return 0;
     }
+
 
     class IngresoViewHolder extends RecyclerView.ViewHolder {
 
