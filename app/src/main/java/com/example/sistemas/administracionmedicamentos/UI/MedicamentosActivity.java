@@ -39,44 +39,7 @@ public class MedicamentosActivity extends AppCompatActivity implements ResponseL
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        //Obtiener el recyclerview desde el XML
-
-        rcvMedicamentos = (RecyclerView)findViewById(R.id.rcvMedicamentos);
-
-
-        //Retorna el paciente ingresado
-
-        paciente_ingreso = IngresoPacientePrefMananger.getIngresoPaciente(MedicamentosActivity.this);
-
-        //Imprime los valores en la tabla
-
-       TextView habitacion = (TextView) findViewById(R.id.txtHabitacion);
-        habitacion.setText(paciente_ingreso.pieza);
-
-        TextView cama = (TextView) findViewById(R.id.txtCama);
-        cama.setText(paciente_ingreso.cama);
-
-        TextView cuenta = (TextView) findViewById(R.id.txtCuenta);
-        cuenta.setText(paciente_ingreso.numerodecuenta);
-
-        TextView ingreso = (TextView) findViewById(R.id.txtIngreso);
-        ingreso.setText(paciente_ingreso.ingreso);
-
-        TextView paciente = (TextView) findViewById(R.id.txtPaciente);
-        paciente.setText(paciente_ingreso.paciente);
-
-        TextView identificacion = (TextView) findViewById(R.id.txtIdentificacion);
-        identificacion.setText(paciente_ingreso.tipo_id_paciente + paciente_ingreso.paciente_id);
-
-
-        String ingresoPaciente = paciente_ingreso.ingreso;
-
-        List<ListModel> mParametros = new ArrayList<ListModel>();
-
-        mParametros.add(new ListModel("ingreso", ingresoPaciente));
-        new AsyncConexion(MedicamentosActivity.this, MedicamentosActivity.this, MedicamentosPrefMananger.getIP(MedicamentosActivity.this),
-                new String[]{"Buscanco Medicamentos", "Aguarde Por Favor..."}, mParametros).execute();
-
+        getDatosMedicaPaciente();
     }
 
     @Override
@@ -102,11 +65,64 @@ public class MedicamentosActivity extends AppCompatActivity implements ResponseL
             Util.Mensaje("Tenemos problemas", "Hay problemas de nuestra parte, intenta mas tarde", MedicamentosActivity.this);
     }
 
+    public void getDatosMedicaPaciente(){
+
+        //Obtiener el recyclerview desde el XML
+
+        rcvMedicamentos = (RecyclerView)findViewById(R.id.rcvMedicamentos);
+
+
+        //Retorna el paciente ingresado
+
+        paciente_ingreso = IngresoPacientePrefMananger.getIngresoPaciente(MedicamentosActivity.this);
+
+        //Imprime los valores en la tabla
+
+        TextView habitacion = (TextView) findViewById(R.id.txtHabitacion);
+        habitacion.setText(paciente_ingreso.pieza);
+
+        TextView cama = (TextView) findViewById(R.id.txtCama);
+        cama.setText(paciente_ingreso.cama);
+
+        TextView cuenta = (TextView) findViewById(R.id.txtCuenta);
+        cuenta.setText(paciente_ingreso.numerodecuenta);
+
+        TextView ingreso = (TextView) findViewById(R.id.txtIngreso);
+        ingreso.setText(paciente_ingreso.ingreso);
+
+        TextView paciente = (TextView) findViewById(R.id.txtPaciente);
+        paciente.setText(paciente_ingreso.paciente);
+
+        TextView identificacion = (TextView) findViewById(R.id.txtIdentificacion);
+        identificacion.setText(paciente_ingreso.tipo_id_paciente + paciente_ingreso.paciente_id);
+
+
+        String ingresoPaciente = paciente_ingreso.ingreso;
+
+        List<ListModel> mParametros = new ArrayList<ListModel>();
+
+        mParametros.add(new ListModel("ingreso", ingresoPaciente));
+        new AsyncConexion(MedicamentosActivity.this, MedicamentosActivity.this, MedicamentosPrefMananger.getIP(MedicamentosActivity.this),
+                new String[]{"Buscanco Medicamentos", "Aguarde Por Favor..."}, mParametros).execute();
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         finish();
         return false;
+    }
+
+    @Override
+    protected void onRestart() {
+        onStart();
+        super.onRestart();
+    }
+
+    @Override
+    protected void onStart() {
+        getDatosMedicaPaciente();
+        super.onStart();
     }
 
 }

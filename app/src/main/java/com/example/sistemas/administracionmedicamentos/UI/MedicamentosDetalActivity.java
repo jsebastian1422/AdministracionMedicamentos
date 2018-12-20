@@ -1,10 +1,14 @@
 package com.example.sistemas.administracionmedicamentos.UI;
 
+import android.arch.core.util.Function;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.util.Linkify;
 import android.view.Menu;
@@ -14,22 +18,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sistemas.administracionmedicamentos.Adaptadores.IngresoMedicamentoAdapter;
 import com.example.sistemas.administracionmedicamentos.Constantes.Error;
 import com.example.sistemas.administracionmedicamentos.JSON.JSONConvert;
 import com.example.sistemas.administracionmedicamentos.Modelos.BodegaPaciente;
+import com.example.sistemas.administracionmedicamentos.Modelos.IngMedicamentoPaciente;
 import com.example.sistemas.administracionmedicamentos.Modelos.ListModel;
 import com.example.sistemas.administracionmedicamentos.Modelos.Medicamentos;
 import com.example.sistemas.administracionmedicamentos.Modelos.Paciente;
+import com.example.sistemas.administracionmedicamentos.Modelos.SuministroMedicamento;
 import com.example.sistemas.administracionmedicamentos.Network.AsyncConexion;
 import com.example.sistemas.administracionmedicamentos.Network.ResponseListener;
 import com.example.sistemas.administracionmedicamentos.R;
 import com.example.sistemas.administracionmedicamentos.SharedPrefMananger.BodegaPacientePrefMananger;
 import com.example.sistemas.administracionmedicamentos.SharedPrefMananger.IngresoPacientePrefMananger;
 import com.example.sistemas.administracionmedicamentos.SharedPrefMananger.MedicamentosPrefMananger;
+import com.example.sistemas.administracionmedicamentos.SharedPrefMananger.SuminMedicamentoPrefMananger;
 import com.example.sistemas.administracionmedicamentos.Utilidades.Util;
 import com.google.zxing.Result;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -37,8 +46,12 @@ import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONArray;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -52,10 +65,15 @@ public class MedicamentosDetalActivity extends AppCompatActivity  implements Res
 
    //Variables definidas para recibir los datos enviados desde el adaptador
    public String Codigo, Producto, Pos,viaAdminis,viaAdminisId,uniDosis,uniDosisId,Frecuen,conUniVent,Obser;
-   public float Stock,totalSuministro,totalDesacho;
+   public float Stock,totalSuministro,totalDesacho, CantTempo = 0;
    public int Cantidad,Dosis,numIngresos;
-   ImageButton openScanner;
+   ImageButton openScanner, addMedicamento, updMedicamento, dltMedicamento;
    EditText codMedicamento;
+
+   RecyclerView rcvListMedicamento;
+   IngresoMedicamentoAdapter adapter;
+   ArrayList<SuministroMedicamento> lIngMedicamento;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +82,14 @@ public class MedicamentosDetalActivity extends AppCompatActivity  implements Res
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        getDatosMedicamento();
-
         //Se estructura el xml
         codMedicamento = (EditText)findViewById(R.id.edtIngreMedicamento);
         openScanner = (ImageButton)findViewById(R.id.openScanner);
+        addMedicamento = (ImageButton)findViewById(R.id.addMedicamento);
+        rcvListMedicamento = (RecyclerView)findViewById(R.id.rcvListMedicamento);
 
+        getDatosMedicamento();
+        addMedicamentoSuminis();
         //Inicializa el escaneo de codigo de barras
         openScanner.setOnClickListener(new View.OnClickListener() {
 
@@ -79,29 +99,7 @@ public class MedicamentosDetalActivity extends AppCompatActivity  implements Res
                 new IntentIntegrator(MedicamentosDetalActivity.this).initiateScan();
             }
         });
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        final IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        handleResult(scanResult);
-    }
-
-    private void handleResult(IntentResult scanResult){
-
-        if (scanResult != null){
-
-            updateTextView(scanResult.getContents(), scanResult.getFormatName());
-        }else {
-            Toast.makeText(this, "No Se Detecto Codigo De Barras", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    /*Metodo que imprime el cosigo de barras recibido*/
-    private void updateTextView(String scan_result, String scan_result_format){
-
-        codMedicamento.setText(scan_result);
     }
 
     public void getDatosMedicamento(){
@@ -171,7 +169,65 @@ public class MedicamentosDetalActivity extends AppCompatActivity  implements Res
         }else{
             rowObsercacio.setVisibility(View.VISIBLE);
         }
+
+
     }
+
+    private void addMedicamentoSuminis(){
+
+        addMedicamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (CantTempo <= Stock){
+
+                    while (CantTempo <= Stock){
+
+                        String codProd = Codigo;
+                        String ingreso = paciente.ingreso;
+                        String codBarra = codMedicamento.getText().toString();
+
+                        List<ListModel> mParametros = new ArrayList<ListModel>();
+                        mParametros.add(new ListModel("ingreso", ingreso));
+                        mParametros.add(new ListModel("codigo_producto", codProd));
+                        mParametros.add(new ListModel("codigo_bar_prodcto", codBarra));
+
+                        new AsyncConexion(MedicamentosDetalActivity.this, MedicamentosDetalActivity.this, SuminMedicamentoPrefMananger.getIP(MedicamentosDetalActivity.this),
+                                new String[]{"Ingresando Producto", "Aguarde Por Favor..."}, mParametros).execute();
+
+                        CantTempo ++;
+                    }
+                }else{
+                    Toast.makeText(MedicamentosDetalActivity.this, "¡No Se Pueden Ingresar Mas Productos!", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        final IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        handleResult(scanResult);
+    }
+
+    private void handleResult(IntentResult scanResult){
+
+        if (scanResult != null){
+
+            updateTextView(scanResult.getContents(), scanResult.getFormatName());
+        }else {
+            Toast.makeText(this, "No Se Detecto Codigo De Barras", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /*Metodo que imprime el cosigo de barras recibido*/
+    private void updateTextView(String scan_result, String scan_result_format){
+
+        codMedicamento.setText(scan_result);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -216,6 +272,11 @@ public class MedicamentosDetalActivity extends AppCompatActivity  implements Res
     @Override
     public void onResponse(JSONArray response) {
 
+        lIngMedicamento = JSONConvert.getSuministroMedica(response);
+        IngresoMedicamentoAdapter adapter = new IngresoMedicamentoAdapter(MedicamentosDetalActivity.this, lIngMedicamento);
+        rcvListMedicamento.setHasFixedSize(true);
+        rcvListMedicamento.setLayoutManager(new LinearLayoutManager(this));
+        rcvListMedicamento.setAdapter(adapter);
     }
 
     @Override

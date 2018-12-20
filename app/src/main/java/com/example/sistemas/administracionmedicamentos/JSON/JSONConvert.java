@@ -6,6 +6,7 @@ import com.example.sistemas.administracionmedicamentos.Modelos.BodegaPaciente;
 import com.example.sistemas.administracionmedicamentos.Modelos.Medicamentos;
 import com.example.sistemas.administracionmedicamentos.Modelos.MedicamentosSuministrados;
 import com.example.sistemas.administracionmedicamentos.Modelos.Paciente;
+import com.example.sistemas.administracionmedicamentos.Modelos.SuministroMedicamento;
 import com.example.sistemas.administracionmedicamentos.Modelos.Usuario;
 
 import org.json.JSONArray;
@@ -223,6 +224,40 @@ public class JSONConvert {
         }
 
         return lMedicamentoSuministrado;
+    }
+
+        public static ArrayList<SuministroMedicamento> getSuministroMedica (JSONArray response){
+
+        ArrayList<SuministroMedicamento> lSuministroMedica = new ArrayList<>();
+
+        try {
+
+            for (int i = 0; i < response.length(); i ++){
+
+                JSONObject mDatos = response.getJSONObject(i);
+
+                //Almacena la informacion del paciente recogido en la busqueda de la bodega del paciente
+
+                SuministroMedicamento suministroMedicamento = new SuministroMedicamento();
+                suministroMedicamento.codigo_barras_iym_id = mDatos.getInt("codigo_barras_iym_id");
+                suministroMedicamento.codigos_cum_id    = mDatos.getInt("codigos_cum_id");
+                suministroMedicamento.fabricante_id    = mDatos.getInt("fabricante_id");
+                suministroMedicamento.codigo_producto    = mDatos.getString("codigo_producto");
+                suministroMedicamento.lote    = mDatos.getString("lote");
+                suministroMedicamento.fecha_vencimiento    = mDatos.getString("fecha_vencimiento");
+                suministroMedicamento.producto    = mDatos.getString("producto");
+                suministroMedicamento.descripcion = mDatos.getString("descripcion");
+                suministroMedicamento.expediente    = mDatos.getString("expediente");
+                suministroMedicamento.consecutivo    = mDatos.getString("consecutivo");
+                suministroMedicamento.registro    = mDatos.getString("registro");
+
+                lSuministroMedica.add(suministroMedicamento);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return lSuministroMedica;
     }
 
 }
